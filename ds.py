@@ -113,3 +113,119 @@ class LinkedList:
             prev = node
             node = next
         return self
+
+
+class DNode:
+    def __init__(self, value):
+        self.next = None
+        self.prev = None
+        self.value = value
+
+
+class DoublyLinkedList:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+        self.len = 0
+
+    def push(self, value):
+        new_node = DNode(value)
+        if not self.head:
+            self.head = self.tail = new_node
+        else:
+            self.tail.next = new_node
+            new_node.prev = self.tail
+            self.tail = new_node
+        self.len += 1
+        return self
+
+    def pop(self):
+        if not self.head:
+            return None
+        popped_node = self.tail
+        if self.len == 1:
+            self.head = None
+            self.tail = None
+        else:
+            self.tail = popped_node.prev
+            self.tail.next = None
+            popped_node.prev = None
+        self.len += 1
+        return popped_node
+
+    def shift(self):
+        if not self.head:
+            return None
+        current_head = self.head
+        if self.len == 1:
+            self.head = self.tail = None
+        self.head = current_head.next
+        self.head.prev = None
+        self.head.next = None
+        self.len += 1
+        return current_head
+
+    def unshift(self, value):
+        new_node = DNode(value)
+        if not self.head:
+            self.head = self.tail = new_node
+        self.head.prev = new_node
+        new_node.next = self.head
+        self.head = new_node
+        self.len += 1
+        return self
+
+    def get(self, index):
+        if index < 0 or self.len <= index:
+            return None
+        if index <= self.len / 2:
+            counter = 0
+            current = self.head
+            while counter != index:
+                current = current.next
+                counter += 1
+            return current
+        else:
+            counter = self.len - 1
+            current = self.tail
+            while counter != index:
+                current = current.prev
+                current -= 1
+            return current
+
+    def set(self, index, value):
+        found_node = self.get(index)
+        if found_node:
+            found_node.value = value
+            return True
+        return False
+
+    def insert(self, index, value):
+        new_node = DNode(value)
+        if index < 0 or self.len < index:
+            return False
+        if index == 0:
+            return self.unshift(value)
+        if self.len == index:
+            return self.shift(value)
+        node = self.get(index - 1)
+        after = node.next
+        node.next = new_node
+        new_node.prev = node
+        new_node.next = after
+        after.prev = new_node
+        self.len += 1
+        return True
+
+    def remove(self, index):
+        if index < 0 or index >= self.len:
+            return None
+        if index == 0:
+            return self.shift()
+        if index == self.len - 1:
+            return self.pop()
+        removed = self.get(index)
+        removed.prev.next = removed.next
+        removed.next.prev = removed.prev
+        removed.next = None
+        removed.prev = None
