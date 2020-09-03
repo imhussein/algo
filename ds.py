@@ -229,3 +229,82 @@ class DoublyLinkedList:
         removed.next.prev = removed.prev
         removed.next = None
         removed.prev = None
+
+
+class SNode:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
+
+class Stack:
+    def __init__(self):
+        self.first = None
+        self.last = None
+        self.size = 0
+
+    def push(self, value):
+        new_node = SNode(value)
+        if not self.first:
+            self.first = self.last = new_node
+        else:
+            temp = self.first
+            self.first = new_node
+            self.first.next = temp
+        self.size += 1
+        return self.size
+
+    def pop(self):
+        if not self.first:
+            return None
+        temp = self.first
+        if self.first == self.last:
+            self.last = None
+        self.first = self.first.next
+        self.size -= 1
+        return temp.value
+
+
+class QNode:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
+
+class Queue:
+    def __init__(self):
+        self.first = None
+        self.last = None
+        self.size = 0
+
+    def enqueue(self, value):
+        new_node = QNode(value)
+        if not self.first:
+            self.first = self.last = new_node
+        else:
+            self.last.next = new_node
+            self.last = new_node
+        self.size += 1
+        return self.size
+
+    def dequeue(self):
+        if not self.first:
+            return None
+        temp = self.first
+        if self.first == self.last:
+            self.last = None
+        self.first.next = self.first
+        self.len -= 1
+        return temp.value
+
+
+class BSTNode:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+
+
+class BinarySearchTree:
+    def __init__(self):
+        self.root = None

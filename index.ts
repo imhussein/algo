@@ -2,6 +2,7 @@ class DNode {
   public value: string;
   public prev: DNode | null;
   public next: DNode | null;
+
   constructor(value) {
     this.value = value;
     this.prev = null;
@@ -13,6 +14,7 @@ class DLinkedList {
   public len: number;
   public head: DNode | null;
   public tail: DNode | null;
+
   constructor() {
     this.len = 0;
     this.head = null;
