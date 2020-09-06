@@ -305,6 +305,96 @@ class BSTNode:
         self.right = None
 
 
-class BinarySearchTree:
+class BST:
     def __init__(self):
         self.root = None
+
+    def insert(self, value):
+        new_node = BSTNode(value)
+        if not self.root:
+            self.root = new_node
+            return self
+        else:
+            current = self.root
+            while True:
+                if value == current:
+                    return None
+                if value < current.value:
+                    if not current.left:
+                        current.left = new_node
+                        return self
+                    current = current.left
+                else:
+                    if not current.right:
+                        current.right = new_node
+                        return self
+                    current = current.right
+
+    def find(self, value):
+        if not self.root:
+            return None
+        current = self.root
+        found = False
+        while not Found and current:
+            if value < current.value:
+                current = current.left
+            elif value > current.value:
+                current = current.right
+            else:
+                found = True
+        if not found:
+            return None
+        return current
+
+    def bfs(self):
+        node = self.root
+        data = []
+        queue = []
+        queue.append(node)
+        while queue:
+            node = queue.pop(0)
+            data.push(node.value)
+            if node.left:
+                queue.append(node.left)
+            if node.right:
+                queue.append(node.right)
+        return data
+
+    def DFSPreOrder(self):
+        data = []
+        current = self.root
+
+        def traverse(node):
+            data.append(node.value)
+            if node.left:
+                traverse(node.left)
+            if node.right:
+                traverse(node.right)
+
+        traverse(current)
+        return data
+
+    def DFSPostOrder(self):
+        data = []
+
+        def traverse(node):
+            if node.left:
+                traverse(node.left)
+            if node.right:
+                traverse(node.right)
+            data.append(node.value)
+
+        traverse(self.root)
+        return data
+
+    def DFSInOrder(self):
+        data = []
+
+        def traverse(node):
+            if node.left:
+                traverse(node.left)
+            data.append(node.value)
+            if node.right:
+                traverse(node.right)
+        traverse(self.root)
+        return data
