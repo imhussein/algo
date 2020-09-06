@@ -1,0 +1,74 @@
+*,
+*::after,
+*::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: inherit;
+}
+
+body {
+  font-family: "Operator Mono";
+  box-sizing: border-box;
+}
+
+.container {
+  background-color: #eee;
+  width: 1000px;
+  margin: 100px auto;
+  display: grid;
+  // grid-template-columns: [header-start] 2fr [header-end box-start] 1fr [box-end footer-start] 2fr [footer-end];
+  grid-template-areas: "header header header header";
+  grid-template-rows: repeat(2, 180px);
+  gap: 21px;
+  grid-auto-flow: dense;
+}
+
+.item {
+  line-height: 180px;
+  text-align: center;
+  font-size: 40px;
+  color: white;
+  border-radius: 5px;
+  box-shadow: 0 0.1rem 0.1rem rgba(0, 0, 0, 0.1);
+  text-shadow: 0 0.1rem 0.1rem rgba(0, 0, 0, 0.2);
+  &-1 {
+    background-color: #0093e9;
+    background-image: linear-gradient(160deg, #0093e9 0%, #80d0c7 100%);
+    background-size: cover;
+    grid-row-start: 2;
+    grid-area: header;
+  }
+  &-2 {
+    background-color: #fbab7e;
+    background-image: linear-gradient(62deg, #fbab7e 0%, #f7ce68 100%);
+    background-size: cover;
+  }
+  &-3 {
+    background-color: #85ffbd;
+    background-image: linear-gradient(45deg, #85ffbd 0%, #fffb7d 100%);
+    background-size: cover;
+  }
+  &-4 {
+    background-color: #ffe53b;
+    background-image: linear-gradient(147deg, #ffe53b 0%, #ff2525 74%);
+    background-size: cover;
+    grid-column-start: 2;
+    grid-row-start: 2;
+  }
+  &-5 {
+    background-color: #74ebd5;
+    background-image: linear-gradient(90deg, #74ebd5 0%, #9face6 100%);
+    grid-row: 2 / -1;
+    background-size: cover;
+  }
+  &-6 {
+    background-color: #ff9a8b;
+    background-image: linear-gradient(
+      90deg,
+      #ff9a8b 0%,
+      #ff6a88 55%,
+      #ff99ac 100%
+    );
+    background-size: cover;
+  }
+}
