@@ -1,0 +1,19 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:db": "json-server -w db.json",
+    "start:parcel": "parcel index.html",
+    "start": "concurrently \"npm run start:db\" \"npm run start:parcel\""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.20.0"
+  },
+  "devDependencies": {
+    "concurrently": "^5.3.0"
+  }
+}
