@@ -13,4 +13,3 @@ var app = express_1.default();
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use(cookie_session_1.default({ secret: "secret" }));
 app.use(server_1.AppRouter.getRouter());
-app.listen(port, function () { return console.log(("Listening on port " + port).green.bold); });

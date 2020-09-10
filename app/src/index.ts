@@ -9,4 +9,3 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieSession({ secret: "secret" }));
 app.use(AppRouter.getRouter());
-app.listen(port, () => console.log(`Listening on port ${port}`.green.bold));
