@@ -1,3 +1,6 @@
 venv
 node_modules
 app/node_modules
+typescript/node_modules
+code/node_modules
+football/node_modules

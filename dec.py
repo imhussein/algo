@@ -30,7 +30,7 @@ Mohamed.x = 'Value Changed'
 print(x.x)
 
 
-names = ('Mohamed', 'Hussein', 'Mohamed', (*'Mohamed'))
+names = ('Mohamed', 'Hussein', 'Mohamed',)
 count = names.count('Mohamed')
 print(count)
 for name in names:
@@ -109,3 +109,33 @@ def get_all_items(value, *args, **kwargs, ):
 
 
 get_all_items(value='sss', name="Mohamed", age=200, )
+
+
+class Mohamed:
+    def __init__(self, name):
+        self.name = name
+
+    @property
+    def get_name(self):
+        return self.name
+
+    @get_name.setter
+    def set_name(self, new_name):
+        self.name = new_name
+
+
+mohamed = Mohamed('Mohamed')
+print(mohamed.get_name)
+mohamed.set_name = 'New Name Added By Setter'
+print(mohamed.get_name)
+
+
+class Person(Mohamed):
+    def __init__(self, name):
+        super().__init__(name)
+
+    def get_my_name(self):
+        return self.name
+
+
+print(Person('Mohamed Hussein Name').get_my_name())

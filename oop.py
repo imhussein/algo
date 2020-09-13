@@ -67,7 +67,7 @@ print(person.full_name)
 
 class Mohamed:
     def __init__(self):
-        self.name = "Moamed"
+        self.name = "Mohamed"
 
     def get_name(self):
         return f"Mohamed {self.name}"
@@ -144,3 +144,40 @@ class Events:
 mohamed = Events()
 mohamed._on("log", lambda name: print(name))
 mohamed._emit("log")
+
+
+class Value(Mohamed):
+    MAX_LENGTH = 2
+
+    def __init__(self, value):
+        super().__init__()
+        self.value = value
+
+    @property
+    def get_value(self):
+        return self.value
+
+    @get_value.setter
+    def set_value(self, value):
+        self.value = value
+
+    def get_name(self):
+        return self.name
+
+    def validate_name(self):
+        if len(self.name) < Value.MAX_LENGTH:
+            raise ValueError('Value is less than 100')
+        else:
+            name = [name * (index + 1) if name is 'M' else index *
+                    name for index, name in enumerate([*self.name])]
+            self.set_value = name
+            for letter in name:
+                print(letter)
+
+
+value = Value("Value Added")
+print(value.get_value)
+print(value.get_name())
+value.set_value = 'value'
+print(value.get_value)
+value.validate_name()
