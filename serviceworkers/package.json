@@ -1,0 +1,23 @@
+{
+  "name": "serviceworkers",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start:server": "nodemon server.js",
+    "start:client": "parcel index.html",
+    "dev": "concurrently npm:start:*"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.20.0",
+    "cookie-session": "^1.4.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "regenerator-runtime": "^0.13.7"
+  },
+  "devDependencies": {
+    "concurrently": "^5.3.0"
+  }
+}

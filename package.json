@@ -5,5 +5,22 @@
   },
   "dependencies": {
     "axios": "^0.20.0"
-  }
+  },
+  "name": "algo",
+  "description": "",
+  "version": "1.0.0",
+  "main": "test.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imhussein/algo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/imhussein/algo/issues"
+  },
+  "homepage": "https://github.com/imhussein/algo#readme"
 }
