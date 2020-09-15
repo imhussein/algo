@@ -14,7 +14,7 @@ var fs = require("fs"),
 app.use(cors());
 app.use(express.json());
 app.use(cookieSession({ secret: "mohamedhussein" }));
-app.get("/", (request, response) => {
+app.get("/data", (request, response) => {
   response.send(data);
 });
 app.post("/", (request, response) => {
@@ -24,7 +24,7 @@ app.post("/", (request, response) => {
     { name } = request.body,
     newItem = {
       id: "" + id,
-      name,
+      name: `Order #${id}`,
     };
   newData = [...data, newItem];
   fs.writeFileSync(file, JSON.stringify(newData), { encoding: "utf-8" });

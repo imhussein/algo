@@ -1,73 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SW</title>
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
-      crossorigin="anonymous"
-    />
-    <style>
-      body {
-        font-family: "Operator Mono";
-      }
 
-      button {
-        font-family: inherit;
-      }
-      .offline-icon {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        display: inline-block;
-        margin-top: 15px;
-        margin-left: 11px;
-        background-color: #28a745;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SW</title>
+  <link rel="stylesheet" href="app.css" />
+  <style>
+    body {
+      font-family: "Operator Mono";
+    }
 
-      .offline-icon.offline {
-        background-color: #dc3545;
-      }
-      .offline-icon.online {
-        background-color: #28a745;
-      }
-    </style>
-  </head>
+    button {
+      font-family: inherit;
+    }
 
-  <body>
-    <nav class="navbar navbar-expand-sm bg-light mb-3 py-0">
-      <div class="container">
-        <a href="/" class="navbar-brand">App</a>
-        <button
-          class="navbar-toggler"
-          data-toggle="collapse"
-          data-target="#navbarCollapse"
-          type="button"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-              <a href="/index.html" class="nav-link">Home</a>
-            </li>
-            <li class="nav-item">
-              <a href="/index.html" class="nav-link">Login</a>
-            </li>
-            <li class="nav-item">
-              <span class="offline-icon"></span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    .offline-icon {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-top: 15px;
+      margin-left: 11px;
+      background-color: #28a745;
+    }
+
+    .offline-icon.offline {
+      background-color: #dc3545;
+    }
+
+    .offline-icon.online {
+      background-color: #28a745;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-sm bg-light mb-3 py-0">
     <div class="container">
-      <button id="btn" class="btn btn-danger btn-sm">Start</button>
-      <div class="collection"></div>
+      <a href="/" class="navbar-brand">App</a>
+      <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse" type="button">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a href="/index.html" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="/index.html" class="nav-link">Login</a>
+          </li>
+          <li class="nav-item">
+            <span class="offline-icon"></span>
+          </li>
+        </ul>
+      </div>
     </div>
-    <script src="index.js"></script>
-  </body>
+  </nav>
+  <div class="container">
+    <button id="btn" class="btn btn-danger btn-sm">Start</button>
+    <div class="collection"></div>
+  </div>
+  <script src="index.js"></script>
+</body>
+
 </html>

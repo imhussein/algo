@@ -2672,7 +2672,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 (function () {
-  _axios.default.get("http://localhost:3000").then(function (res) {
+  _axios.default.get("http://localhost:3000/data").then(function (res) {
     return render(res.data);
   }).catch(function (err) {
     throw new Error(err);
@@ -2729,11 +2729,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 2:
               serviceWorkerRegisteration = _context.sent;
               svcWorker = serviceWorkerRegisteration.installing || serviceWorkerRegisteration.waiting || serviceWorkerRegisteration.active;
-              navigator.serviceWorker.addEventListener("controllerchange", function ocControllerChange() {
+              sendStatusUpdate(svcWorker);
+              navigator.serviceWorker.addEventListener("controllerchange", function onControllerChange() {
                 svcWorker = navigator.serviceWorker.controller;
+                sendStatusUpdate(svcWorker);
               });
+              navigator.serviceWorker.addEventListener("message", onSWMessage);
 
-            case 5:
+            case 7:
             case "end":
               return _context.stop();
           }
@@ -2741,6 +2744,51 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }, _callee);
     }));
     return _initServiceWorker.apply(this, arguments);
+  }
+
+  function onSWMessage(event) {
+    var data = event.data;
+
+    if (data.requestStatusUpdate) {
+      sendStatusUpdate(event.ports && event.ports[0]);
+    }
+  }
+
+  function sendStatusUpdate(target) {
+    sendMessage({
+      statusUpdate: {
+        isOnline: isOnline,
+        isLoggedIn: true
+      }
+    }, target);
+  }
+
+  function sendMessage(_x, _x2) {
+    return _sendMessage.apply(this, arguments);
+  }
+
+  function _sendMessage() {
+    _sendMessage = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(message, target) {
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              if (target) {
+                target.postMessage(message);
+              } else if (svcWorker) {
+                svcWorker.postMessage(message);
+              } else {
+                navigator.serviceWorker.controller.postMessage(message);
+              }
+
+            case 1:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+    return _sendMessage.apply(this, arguments);
   }
 
   function ready() {
@@ -2754,11 +2802,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     window.addEventListener("online", function () {
       console.log(isOnline);
       isOnline = true;
+      sendStatusUpdate();
       offlineIcon.classList.add("online");
       offlineIcon.classList.remove("offline");
     });
     window.addEventListener("offline", function () {
       isOnline = false;
+      sendStatusUpdate();
       offlineIcon.classList.add("offline");
       offlineIcon.classList.remove("online");
     });
@@ -2792,7 +2842,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "34863" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "38319" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
