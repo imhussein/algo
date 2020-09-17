@@ -1,34 +1,39 @@
-from math import (floor)
+import math
 
 
-class MaxBinaryHeap:
+class Node:
+    def __init__(self, priority, value):
+        self.priority = priority
+        self.value = value
+
+
+class Priority:
     def __init__(self):
-        self.values = [41, 39, 33, 18, 27, 12]
+        self.values = []
 
-    def insert(self, value):
-        self.values.append(value)
+    def enqueue(self, value, priority):
+        new_node = Node(priority, value)
+        self.values.append(new_node)
         self.bubbleUp()
 
     def bubbleUp(self):
         index = len(self.values) - 1
-        ELEMENT = self.values[index]
+        element = self.values[index]
         while index > 0:
-            parentIndex = floor((index - 1) / 2)
+            parentIndex = math.floor((n - 1) / 2)
             parentElement = self.values[parentIndex]
-            if ELEMENT <= parentElement:
+            if element.priority <= parentElement.priority:
                 break
-            if ELEMENT > parentElement:
-                self.values[parentIndex] = ELEMENT
-                self.values[index] = parentElement
-                index = parentIndex
+            self.values[parentIndex] = element
+            self.values[index] = parentElement
+            index = parentIndex
 
-    def siftDown(self):
-        root = self.values[0]
+    def dequeue(self):
+        maxPriority = self.values[0]
         end = self.values.pop()
         self.values[0] = end
         index = 0
         length = len(self.values)
-        element = self.values[0]
         while True:
             leftChildIndex = 2 * index + 1
             rightChildIndex = 2 * index + 2
@@ -37,22 +42,15 @@ class MaxBinaryHeap:
             swap = None
             if leftChildIndex < length:
                 leftChild = self.values[leftChildIndex]
-                if leftChild > element:
+                if leftChild.priority > maxPriority.priority:
                     swap = leftChildIndex
             if rightChildIndex < length:
                 rightChild = self.values[rightChildIndex]
-                if (swap is None and rightChild > element) or (swap is not None and rightChild > leftChild):
+                if (swap is None and rightChild.priority > maxPriority.priority) or (swap is not None and rightChild > leftChild):
                     swap = rightChildIndex
             if swap is None:
                 break
             self.values[index] = self.values[swap]
-            self.values[swap] = element
+            self.values[swap] = maxPriority
             index = swap
-        return root
-
-
-maxB = MaxBinaryHeap()
-maxB.insert(55)
-print(maxB.values)
-maxB.siftDown()
-print(maxB.values)
+        return maxPriority
