@@ -2,14 +2,16 @@ from math import (floor)
 
 
 class MaxBinaryHeap:
+    data = 'Added Value'
+
     def __init__(self):
         self.values = [41, 39, 33, 18, 27, 12]
 
     def insert(self, value):
         self.values.append(value)
-        self.bubbleUp()
+        self.siftUp()
 
-    def bubbleUp(self):
+    def siftUp(self):
         index = len(self.values) - 1
         ELEMENT = self.values[index]
         while index > 0:

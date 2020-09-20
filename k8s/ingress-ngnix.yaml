@@ -1,0 +1,19 @@
+apiVersion: extension/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-srv
+  annotations:
+    - kubernetes.io/ingrss.class: nginx
+    - nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /
+            backend:
+              serviceName: client-cluster-ip-srv
+              servicePort: 3000
+          - path: /api
+            backend:
+              servicName: server-cluster-ip-srv
+              servicePort: 50000
