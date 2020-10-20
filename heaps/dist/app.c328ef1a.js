@@ -152,6 +152,47 @@ var MaxBinaryHeap = /*#__PURE__*/function () {
         index = parentIndex;
       }
     }
+  }, {
+    key: "siftDown",
+    value: function siftDown() {
+      var max = this.values[0];
+      var end = this.values.pop();
+      this.values[0] = end;
+      var index = 0;
+      var length = this.values.length;
+      var element = this.values[0];
+
+      while (true) {
+        var leftChildIndex = 2 * index + 1;
+        var rightChildIndex = 2 * index + 2;
+        var swap = null;
+        var leftChild;
+        var rightChild;
+
+        if (leftChildIndex < length) {
+          leftChild = this.values[leftChildIndex];
+
+          if (leftChild > element) {
+            swap = leftChildIndex;
+          }
+        }
+
+        if (rightChildIndex < length) {
+          rightChild = this.values[rightChildIndex];
+
+          if (!swap && rightChild > element || swap && rightChild > leftChild) {
+            swap = rightChildIndex;
+          }
+        }
+
+        if (!swap) break;
+        this.values[index] = this.values[swap];
+        this.values[swap] = element;
+        index = swap;
+      }
+
+      return max;
+    }
   }]);
 
   return MaxBinaryHeap;
@@ -159,6 +200,7 @@ var MaxBinaryHeap = /*#__PURE__*/function () {
 
 var heap = new MaxBinaryHeap();
 heap.insert(100);
+heap.siftDown();
 console.log(heap);
 },{}],"../../.nvm/versions/node/v10.17.0/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -188,7 +230,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "45503" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "32827" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

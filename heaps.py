@@ -58,3 +58,13 @@ maxB.insert(55)
 print(maxB.values)
 maxB.siftDown()
 print(maxB.values)
+
+
+def log(name):
+    if 'data' in name:
+        print(name)
+    else:
+        print('Not Exist')
+
+
+log('Mohamed')

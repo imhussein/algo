@@ -117,79 +117,79 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"../.nvm/versions/node/v10.17.0/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
-var bundleURL = null;
+})({"image.png":[function(require,module,exports) {
+module.exports = "/image.5ae2eb22.png";
+},{}],"app.js":[function(require,module,exports) {
+"use strict";
 
-function getBundleURLCached() {
-  if (!bundleURL) {
-    bundleURL = getBundleURL();
-  }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.draw = exports.create = exports.loadImage = void 0;
 
-  return bundleURL;
-}
+var _image = _interopRequireDefault(require("./image.png"));
 
-function getBundleURL() {
-  // Attempt to find the URL of the current script and use that as the base URL
-  try {
-    throw new Error();
-  } catch (err) {
-    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-    if (matches) {
-      return getBaseURL(matches[0]);
-    }
-  }
+// Load Image
+var loadImage = function loadImage(_ref) {
+  var url = _ref.url,
+      width = _ref.width,
+      height = _ref.height;
+  return new Promise(function (resolve, reject) {
+    var image = new Image();
+    image.addEventListener("load", function () {
+      return resolve({
+        image: image,
+        width: width,
+        height: height
+      });
+    });
+    image.addEventListener("error", function (errorEvent) {
+      return reject(errorEvent);
+    });
+    image.src = url;
+  });
+}; // Dom Sync
 
-  return '/';
-}
 
-function getBaseURL(url) {
-  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
-}
+exports.loadImage = loadImage;
 
-exports.getBundleURL = getBundleURLCached;
-exports.getBaseURL = getBaseURL;
-},{}],"../.nvm/versions/node/v10.17.0/lib/node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
-var bundle = require('./bundle-url');
+var create = function create(image, width, height) {
+  var canvas = document.createElement("canvas");
+  canvas.width = width;
+  canvas.height = height;
+  var context = canvas.getContext("2d");
+  context.drawImage(image, 0, 0, 3000, 3000, 0, 0, 3000, 3000);
+  document.body.appendChild(canvas);
+}; // Draw
 
-function updateLink(link) {
-  var newLink = link.cloneNode();
 
-  newLink.onload = function () {
-    link.remove();
-  };
+exports.create = create;
 
-  newLink.href = link.href.split('?')[0] + '?' + Date.now();
-  link.parentNode.insertBefore(newLink, link.nextSibling);
-}
+var draw = function draw(width, height, image) {
+  loadImage({
+    url: image,
+    width: width,
+    height: height
+  }).then(function (_ref2) {
+    var image = _ref2.image,
+        width = _ref2.width,
+        height = _ref2.height;
+    create(image, width, height);
+  }).catch(function (err) {
+    return console.log(err);
+  });
+};
 
-var cssTimeout = null;
-
-function reloadCSS() {
-  if (cssTimeout) {
-    return;
-  }
-
-  cssTimeout = setTimeout(function () {
-    var links = document.querySelectorAll('link[rel="stylesheet"]');
-
-    for (var i = 0; i < links.length; i++) {
-      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
-        updateLink(links[i]);
-      }
-    }
-
-    cssTimeout = null;
-  }, 50);
-}
-
-module.exports = reloadCSS;
-},{"./bundle-url":"../.nvm/versions/node/v10.17.0/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"app.scss":[function(require,module,exports) {
-var reloadCSS = require('_css_loader');
-
-module.hot.dispose(reloadCSS);
-module.hot.accept(reloadCSS);
-},{"_css_loader":"../.nvm/versions/node/v10.17.0/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../.nvm/versions/node/v10.17.0/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+exports.draw = draw;
+var vec = {
+  image: _image.default,
+  width: 600,
+  height: 400
+};
+draw(vec.width, vec.height, vec.image);
+},{"./image.png":"image.png"}],"../../.nvm/versions/node/v10.17.0/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -217,7 +217,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "32927" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "35361" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -393,5 +393,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../.nvm/versions/node/v10.17.0/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js"], null)
-//# sourceMappingURL=/app.55bab2ff.js.map
+},{}]},{},["../../.nvm/versions/node/v10.17.0/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","app.js"], null)
+//# sourceMappingURL=/app.c328ef1a.js.map
