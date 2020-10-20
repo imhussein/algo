@@ -7,5 +7,14 @@
 }
 
 body {
-  font-family: "Operator Mono";
+  font-family: "Operator Mono" !important;
+  font-weight: normal !important;
+}
+
+main {
+  min-height: 80vh;
+}
+
+.rating span {
+  margin: 0.1rem;
 }
