@@ -4,6 +4,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import Mongoose from "mongoose";
 import "colors";
+import bcryptjs from "bcryptjs";
+import jwt from "jsonwebtoken";
 
 const { Schema, model: Model } = Mongoose;
 const app = express();
@@ -260,13 +262,71 @@ app.get("/", (req, res) => {
   });
 });
 
-app.get("/api/products", (req, res) => {
-  res.json(products);
+app.get("/api/products", async (req, res) => {
+  try {
+    const products = await Product.find();
+    res.json(products);
+  } catch (error) {
+    next(error);
+  }
 });
 
-app.get("/api/products/:id", (req, res) => {
-  const product = products.find((p) => p._id === req.params.id);
-  res.json(product);
+app.get("/api/products/:id", async (req, res) => {
+  const product = await Product.findById(req.params.id);
+  if (product) {
+    res.json(product);
+  } else {
+    res.status(404).json({ message: "Product Not Found" });
+  }
+});
+
+function genWebToken(id) {
+  return jwt.sign({ id }, "abcd123", {
+    expiresIn: "30d",
+  });
+}
+
+app.post("/users/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
+    if (user) {
+      const isMatch = await bcryptjs.compare(password, user.password);
+      if (isMatch) {
+        res.json({
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+          isAdmin: user.isAdmin,
+          token: genWebToken(user._id),
+        });
+      } else {
+        res.status(401).json({
+          message: "Invalid Email And Password",
+        });
+      }
+    } else {
+      res.json({
+        message: "User Not Found",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+async function authMiddleware(req, res, next) {
+  try {
+    const decoded = jwt.verify(req.headers.authorization, "abcd123");
+    req.user = await User.findOne({ _id: decoded.id }).select("-password");
+    next();
+  } catch (error) {
+    res.status(401).json({ message: "Not Authorized" });
+  }
+}
+
+app.get("/user", authMiddleware, (req, res) => {
+  res.send(req.user);
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`.yellow.bold));
