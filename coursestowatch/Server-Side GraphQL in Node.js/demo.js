@@ -44,6 +44,12 @@ const User = mongoose.model("User", UserSchema);
 const models = { User };
 
 const typeDefs = gql`
+  enum Names {
+    MOHAMED
+    JANE
+    DOE
+  }
+
   interface HasID {
     id: ID
   }
@@ -56,6 +62,7 @@ const typeDefs = gql`
     createdAt: String
     updatedAt: String
     isAdmin: Boolean
+    myName: Names
   }
 
   type Query {
@@ -71,14 +78,14 @@ const typeDefs = gql`
 
 async function getUser(_id) {
   const user = await User.findOne({ _id });
-  return user;
+  return { ...user, myName: "JANE" };
 }
 
 const resolvers = {
   Query: {
     users: async (parentValue, args, { models: { User } }, info) => {
       const users = await User.find();
-      return users;
+      return users.map((u) => ({ ...u, myName: "MOHAMED" }));
     },
     user: (parentValue, { id: _id }, { models: { User } }, info) => {
       return getUser(_id);
