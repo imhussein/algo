@@ -1,7 +1,6 @@
 # =================================================
 # 2 Docker and Kubernetes: The Complete Guide
 # 3 Microservices with Node JS and React
-# 11 Node.js, Express, MongoDB & More: The Complete Bootcamp 2020
 # 12 Digging Into Node.js
 # =================================================
 # 4 Introduction to Data Visualization with d3.js v4
@@ -16,3 +15,12 @@
 # 8 Server-Side GraphQL in Node.js (Done 100%)
 # 1 MERN eCommerce From Scratch (100%)
 # =================================================
+
+
+# 11 Node.js, Express, MongoDB & More: The Complete Bootcamp 2020
+
+
+# Today Till Kubernetes
+# Postgres Some
+# Rest Of Kubernetes + 50 % of the project
+# Rest Of Postgres + Last 2 days Google cloud
