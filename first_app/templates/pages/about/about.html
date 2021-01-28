@@ -1,0 +1,6 @@
+{% extends 'base/base.html' %}{% load static %}
+<div>{% block title %}{{title}}{% endblock %}</div>
+{% block content %}
+<h1>About Page</h1>
+<img src="{% static '1.jpeg' %}" alt="image" width="30%" draggable="false" />
+{% endblock %}

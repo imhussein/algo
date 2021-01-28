@@ -1,0 +1,15 @@
+<nav class="indigo" style="line-height: 50px; height: 50px">
+  <div class="nav-wrapper">
+    <div class="container">
+      <a href="{% url 'index' %}" class="brand-logo">App</a>
+      <ul class="right">
+        <li {% if '/' == request.path %} class="active" {% endif %}>
+          <a href="{% url 'index' %}">Home</a>
+        </li>
+        <li {% if 'about' in request.path %} class="active" {% endif %}>
+          <a href="{% url 'about' %}">About</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
